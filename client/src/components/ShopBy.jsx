@@ -3,34 +3,39 @@ import React, { useEffect, useState } from "react";
 import HorSlider from "./HorSlider";
 
 const ShopBy = ({ filter, title }) => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([
+    { src: "/GenInfo/adidas.jpg", name: "Adidas", to: "/search/adidas" },
+    { src: "/GenInfo/nike.png", name: "Nike", to: "/search/nike" },
+    { src: "/GenInfo/skechers.jpg", name: "Skechers", to: "/search/skechers" },
+    { src: "/GenInfo/puma.jpg", name: "Puma", to: "/search/puma" },
+  ]);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    let isMounted = true;
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}/api/filter/${filter}`
-        );
-        if (isMounted) {
-          setProducts(res.data);
-          setLoading(false);
-        }
-      } catch (err) {
-        if (isMounted) {
-          console.error(`Error while fetching products: ${err.message}`);
-          setError(err);
-          setLoading(false);
-        }
-      }
-    };
-    fetchData();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+  // useEffect(() => {
+  //   let isMounted = true;
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await axios.get(
+  //         `${import.meta.env.VITE_BASE_URL}/api/filter/${filter}`
+  //       );
+  //       if (isMounted) {
+  //         // setProducts(res.data);
+  //         setLoading(false);
+  //       }
+  //     } catch (err) {
+  //       if (isMounted) {
+  //         console.error(`Error while fetching products: ${err.message}`);
+  //         setError(err);
+  //         setLoading(false);
+  //       }
+  //     }
+  //   };
+  //   fetchData();
+  //   return () => {
+  //     isMounted = false;
+  //   };
+  // }, []);
 
   return (
     <>
